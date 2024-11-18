@@ -1,0 +1,17 @@
+# Install the official repository from gitlab it self 
+sudo apt update && sudo apt upgrade -y 
+sudo apt install curl -y 
+curl -s https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh | sudo bash 
+sudo apt install gitlab-ce
+sudo nano /etc/gitlab/gitlab.rb
+# replace this ##### external_url 'http://gitlab.example.com' ###### with your Domain for ex.
+external_url 'https://gitlabv.dragonteam.dev'
+# then press ctrl+w and search for letsencrypt
+# change this line # letsencrypt['enable'] = nil
+letsencrypt['enable'] = true
+#add your e-mail # letsencrypt['contact_emails'] = ['email here'] # This should be an array of email addresses to add as contacts
+letsencrypt['contact_emails'] = ['mustafa@example.com']
+# remove comment in this line 
+letsencrypt['auto_renew'] = true
+#then exit
+sudo gitlab-ctl reconfigure 
